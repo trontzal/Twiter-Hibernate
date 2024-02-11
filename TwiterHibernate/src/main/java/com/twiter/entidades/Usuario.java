@@ -2,12 +2,15 @@ package com.twiter.entidades;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,14 +23,14 @@ public class Usuario {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "nick_name")
+	@Column(name = "nick_name", nullable = false)
 	private String nickName;
 	
-	@Column(name = "user")
+	@Column(name = "user", nullable = false, unique = true)
 	private String user;
 	
 	@ManyToOne
-	@JoinColumn(name = "rol_id")
+	@JoinColumn(name = "roles_id")
 	private Rol rol;
 
 	public Usuario() {
