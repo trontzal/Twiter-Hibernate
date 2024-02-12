@@ -1,7 +1,5 @@
 package com.twiter;
 
-import com.twiter.entidades.Usuario;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -13,15 +11,6 @@ public class App {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TwiterApp");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
-        // Crear una instancia de Usuario
-        Usuario usuario = new Usuario();
-        usuario.setNickName("usuario1");
-        usuario.setUser("nombredeusuario1");
-
-        // Iniciar una transacción para guardar el usuario en la base de datos
-        entityManager.getTransaction().begin();
-        entityManager.persist(usuario);
-        entityManager.getTransaction().commit();
         
         // Cerrar la sesión de Hibernate
         entityManager.close();

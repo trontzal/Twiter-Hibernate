@@ -1,11 +1,12 @@
 package com.twiter.entidades;
 
-import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,37 +24,35 @@ public class Post {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "texto", nullable = false)
-	private String texto;
-
+	@Column(name = "fecha", nullable = false)
+	private LocalDate fecha;
+	
 	@ManyToOne
-	@JoinColumn(name = "usuaio_id")
+	@JoinColumn(name = "usuaio_id",nullable = false, foreignKey = @ForeignKey(name = "FK_post_usuario"))
 	private Usuario usuario;
 
-	@ManyToMany(mappedBy = "postsRetwiteados")
-	private Set<Usuario> usuariosQueHanRetwiteado = new HashSet<Usuario>();
+	@Column(name = "texto", nullable = false, length = 240)
+	private String texto;
+	
+	@ManyToMany(mappedBy = "aRetwiteado")
+	private Set<Usuario> retwiteadoPor;
 
 	public Post() {
 		super();
 	}
 
-	public Post(Long id, String texto, Usuario usuario, Set<Usuario> usuariosQueHanRetwiteado) {
+	public Post(Long id, LocalDate fecha, Usuario usuario, String texto, Set<Usuario> retwiteadoPor) {
 		super();
 		this.id = id;
-		this.texto = texto;
+		this.fecha = fecha;
 		this.usuario = usuario;
-		this.usuariosQueHanRetwiteado = usuariosQueHanRetwiteado;
-	}
-
-	@Override
-	public String toString() {
-		return "Post [id=" + id + ", texto=" + texto + ", usuario=" + usuario + ", usuariosQueHanRetwiteado="
-				+ usuariosQueHanRetwiteado + "]";
+		this.texto = texto;
+		this.retwiteadoPor = retwiteadoPor;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, texto, usuario, usuariosQueHanRetwiteado);
+		return Objects.hash(fecha, id, retwiteadoPor, texto, usuario);
 	}
 
 	@Override
@@ -65,9 +64,15 @@ public class Post {
 		if (getClass() != obj.getClass())
 			return false;
 		Post other = (Post) obj;
-		return Objects.equals(id, other.id) && Objects.equals(texto, other.texto)
-				&& Objects.equals(usuario, other.usuario)
-				&& Objects.equals(usuariosQueHanRetwiteado, other.usuariosQueHanRetwiteado);
+		return Objects.equals(fecha, other.fecha) && Objects.equals(id, other.id)
+				&& Objects.equals(retwiteadoPor, other.retwiteadoPor) && Objects.equals(texto, other.texto)
+				&& Objects.equals(usuario, other.usuario);
+	}
+
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario + ", texto=" + texto + ", retwiteadoPor="
+				+ retwiteadoPor + "]";
 	}
 
 	public Long getId() {
@@ -78,12 +83,12 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getTexto() {
-		return texto;
+	public LocalDate getFecha() {
+		return fecha;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
 	}
 
 	public Usuario getUsuario() {
@@ -94,12 +99,22 @@ public class Post {
 		this.usuario = usuario;
 	}
 
-	public Set<Usuario> getUsuariosQueHanRetwiteado() {
-		return usuariosQueHanRetwiteado;
+	public String getTexto() {
+		return texto;
 	}
 
-	public void setUsuariosQueHanRetwiteado(Set<Usuario> usuariosQueHanRetwiteado) {
-		this.usuariosQueHanRetwiteado = usuariosQueHanRetwiteado;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 
+	public Set<Usuario> getRetwiteadoPor() {
+		return retwiteadoPor;
+	}
+
+	public void setRetwiteadoPor(Set<Usuario> retwiteadoPor) {
+		this.retwiteadoPor = retwiteadoPor;
+	}
+	
+	
+	
 }
