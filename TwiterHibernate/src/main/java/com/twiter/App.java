@@ -12,6 +12,7 @@ public class App {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         
+        
         // Cerrar la sesión de Hibernate
         entityManager.close();
         entityManagerFactory.close();

@@ -26,14 +26,14 @@ public class Post {
 
 	@Column(name = "fecha", nullable = false)
 	private LocalDate fecha;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "usuairo_id",nullable = false, foreignKey = @ForeignKey(name = "FK_post_usuario"))
+	@JoinColumn(name = "usuairo_id", nullable = false, foreignKey = @ForeignKey(name = "FK_post_usuario"))
 	private Usuario usuario;
 
 	@Column(name = "texto", nullable = false, length = 240)
 	private String texto;
-	
+
 	@ManyToMany(mappedBy = "aRetwiteado")
 	private Set<Usuario> retwiteadoPor;
 
@@ -114,7 +114,5 @@ public class Post {
 	public void setRetwiteadoPor(Set<Usuario> retwiteadoPor) {
 		this.retwiteadoPor = retwiteadoPor;
 	}
-	
-	
-	
+
 }

@@ -23,10 +23,10 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "nick_name", nullable = false, length = 100)
 	private String nickName;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "roles_id", nullable = false, foreignKey = @ForeignKey(name = "FK_usuario_rol"))
 	private Rol rol;
@@ -34,11 +34,11 @@ public class Usuario {
 	@ManyToMany
 	@JoinTable(name = "posts_retwiteados", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "post_id"), foreignKey = @ForeignKey(name = "FK_post_retwiteado_por_usuario"), inverseForeignKey = @ForeignKey(name = "FK_usuario_retwitea_post"))
 	private Set<Post> aRetwiteado;
-	
+
 	@ManyToMany
 	@JoinTable(name = "seguidores", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "seguidor_de_id"))
 	private Set<Usuario> seguidorDe;
-	
+
 	public Usuario() {
 	}
 
@@ -115,6 +115,5 @@ public class Usuario {
 	public void setSeguidorDe(Set<Usuario> seguidorDe) {
 		this.seguidorDe = seguidorDe;
 	}
-	
-	
+
 }
