@@ -1,5 +1,6 @@
 package com.twiter.entidades;
 
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -40,4 +41,80 @@ public class Usuario {
 	
 	public Usuario() {
 	}
+
+	public Usuario(Long id, String nickName, Rol rol, Set<Post> aRetwiteado, Set<Usuario> seguidorDe) {
+		super();
+		this.id = id;
+		this.nickName = nickName;
+		this.rol = rol;
+		this.aRetwiteado = aRetwiteado;
+		this.seguidorDe = seguidorDe;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(aRetwiteado, id, nickName, rol, seguidorDe);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(aRetwiteado, other.aRetwiteado) && Objects.equals(id, other.id)
+				&& Objects.equals(nickName, other.nickName) && Objects.equals(rol, other.rol)
+				&& Objects.equals(seguidorDe, other.seguidorDe);
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nickName=" + nickName + ", rol=" + rol + ", aRetwiteado=" + aRetwiteado
+				+ ", seguidorDe=" + seguidorDe + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+	public Set<Post> getaRetwiteado() {
+		return aRetwiteado;
+	}
+
+	public void setaRetwiteado(Set<Post> aRetwiteado) {
+		this.aRetwiteado = aRetwiteado;
+	}
+
+	public Set<Usuario> getSeguidorDe() {
+		return seguidorDe;
+	}
+
+	public void setSeguidorDe(Set<Usuario> seguidorDe) {
+		this.seguidorDe = seguidorDe;
+	}
+	
+	
 }
