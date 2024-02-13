@@ -65,8 +65,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nickName=" + nickName + ", contrasena=" + contrasena + ", rol=" + rol
-				+ ", aRetwiteado=" + aRetwiteado + ", seguidorDe=" + seguidorDe + "]";
+		return "Usuario [id=" + id + ", nickName=" + nickName + ", contrasena=" + contrasena + ", rol=" + rol + "]";
 	}
 
 	@Override

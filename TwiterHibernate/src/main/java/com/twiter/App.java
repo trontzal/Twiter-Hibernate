@@ -14,13 +14,24 @@ public class App {
 
 	public static void main(String[] args) {
 		// roles para que se puedan crear usuarios
-		RolAccesoDatos.insertar(new Rol(null, "rolAdmin"));
+		RolAccesoDatos.insertar(new Rol(null, "ADMIN"));
+		RolAccesoDatos.insertar(new Rol(null, "USER"));
 		
 		// obtener el rol para poder usarlo al crear el usuario
 		Rol rolAdmin = RolAccesoDatos.obtenerPorId(1);
+		Rol rolUser = RolAccesoDatos.obtenerPorId(2);
+		
 		
 		//registro (insert usuario)
 		UsuarioAccesoDatos.insertar(new Usuario("gonzalo", "contra", rolAdmin));
+		UsuarioAccesoDatos.insertar(new Usuario("pepe", "pepe", rolUser));
+		
+		// loggeo (buscar el usuario)
+		Usuario gonzalo = UsuarioAccesoDatos.buscarPorNickName("gonzalo");
+		
+		
+		// Salidas de consola --------------------------
+		System.out.println(gonzalo);
 	}
 	
 	
