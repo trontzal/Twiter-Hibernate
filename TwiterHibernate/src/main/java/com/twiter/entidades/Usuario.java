@@ -26,6 +26,9 @@ public class Usuario {
 
 	@Column(name = "nick_name", nullable = false, length = 100)
 	private String nickName;
+	
+	@Column(name = "contrasena", nullable = false)
+	private String contrasena;
 
 	@ManyToOne
 	@JoinColumn(name = "roles_id", nullable = false, foreignKey = @ForeignKey(name = "FK_usuario_rol"))
@@ -42,18 +45,33 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nickName, Rol rol, Set<Post> aRetwiteado, Set<Usuario> seguidorDe) {
+	public Usuario(String nickName, String contrasena, Rol rol) {
+		super();
+		this.nickName = nickName;
+		this.contrasena = contrasena;
+		this.rol = rol;
+	}
+
+	public Usuario(Long id, String nickName, String contrasena, Rol rol, Set<Post> aRetwiteado,
+			Set<Usuario> seguidorDe) {
 		super();
 		this.id = id;
 		this.nickName = nickName;
+		this.contrasena = contrasena;
 		this.rol = rol;
 		this.aRetwiteado = aRetwiteado;
 		this.seguidorDe = seguidorDe;
 	}
 
 	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nickName=" + nickName + ", contrasena=" + contrasena + ", rol=" + rol
+				+ ", aRetwiteado=" + aRetwiteado + ", seguidorDe=" + seguidorDe + "]";
+	}
+
+	@Override
 	public int hashCode() {
-		return Objects.hash(aRetwiteado, id, nickName, rol, seguidorDe);
+		return Objects.hash(aRetwiteado, contrasena, id, nickName, rol, seguidorDe);
 	}
 
 	@Override
@@ -65,15 +83,9 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(aRetwiteado, other.aRetwiteado) && Objects.equals(id, other.id)
-				&& Objects.equals(nickName, other.nickName) && Objects.equals(rol, other.rol)
-				&& Objects.equals(seguidorDe, other.seguidorDe);
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nickName=" + nickName + ", rol=" + rol + ", aRetwiteado=" + aRetwiteado
-				+ ", seguidorDe=" + seguidorDe + "]";
+		return Objects.equals(aRetwiteado, other.aRetwiteado) && Objects.equals(contrasena, other.contrasena)
+				&& Objects.equals(id, other.id) && Objects.equals(nickName, other.nickName)
+				&& Objects.equals(rol, other.rol) && Objects.equals(seguidorDe, other.seguidorDe);
 	}
 
 	public Long getId() {
@@ -90,6 +102,14 @@ public class Usuario {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public Rol getRol() {
@@ -115,5 +135,5 @@ public class Usuario {
 	public void setSeguidorDe(Set<Usuario> seguidorDe) {
 		this.seguidorDe = seguidorDe;
 	}
-
+	
 }
