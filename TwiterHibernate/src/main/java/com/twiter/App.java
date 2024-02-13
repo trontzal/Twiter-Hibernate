@@ -1,7 +1,9 @@
 package com.twiter;
 
+import com.twiter.accesodatos.PostAccesoDatos;
 import com.twiter.accesodatos.RolAccesoDatos;
 import com.twiter.accesodatos.UsuarioAccesoDatos;
+import com.twiter.entidades.Post;
 import com.twiter.entidades.Rol;
 import com.twiter.entidades.Usuario;
 
@@ -29,9 +31,18 @@ public class App {
 		// loggeo (buscar el usuario)
 		Usuario gonzalo = UsuarioAccesoDatos.buscarPorNickName("gonzalo");
 		
+		// posteo
+		Post primerPost = new Post(gonzalo, "Primer post de mi aplicacion de twiter");
+		PostAccesoDatos.insert(primerPost);
+		var posts = PostAccesoDatos.obtenerTodos();
 		
-		// Salidas de consola --------------------------
+		// Salidas de consola ------------------------------------------------
+		// Ver usuarios
 		System.out.println(gonzalo);
+		// Ver todos los posts
+		System.out.println(posts);
+		
+		
 	}
 	
 	
