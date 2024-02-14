@@ -23,24 +23,31 @@ public class App {
 		Rol rolAdmin = RolAccesoDatos.obtenerPorId(1);
 		Rol rolUser = RolAccesoDatos.obtenerPorId(2);
 		
-		
 		//registro (insert usuario)
 		UsuarioAccesoDatos.insertar(new Usuario("gonzalo", "contra", rolAdmin));
 		UsuarioAccesoDatos.insertar(new Usuario("pepe", "pepe", rolUser));
+		UsuarioAccesoDatos.insertar(new Usuario("juan", "juan", rolUser));
 		
 		// loggeo (buscar el usuario)
 		Usuario gonzalo = UsuarioAccesoDatos.buscarPorNickName("gonzalo");
+		Usuario pepe = UsuarioAccesoDatos.buscarPorNickName("pepe");
+		Usuario juan = UsuarioAccesoDatos.buscarPorNickName("juan");
 		
-		// posteo
+		// gestion de posts
 		Post primerPost = new Post(gonzalo, "Primer post de mi aplicacion de twiter");
 		PostAccesoDatos.insert(primerPost);
 		var posts = PostAccesoDatos.obtenerTodos();
+		
+		// seguimientos
+		UsuarioAccesoDatos.agregarSeguidor(pepe.getId(), gonzalo.getId());
 		
 		// Salidas de consola ------------------------------------------------
 		// Ver usuarios
 		System.out.println(gonzalo);
 		// Ver todos los posts
 		System.out.println(posts);
+		// Ver las personas a las que sigue gonzalo
+		System.out.println();
 		
 		
 	}
