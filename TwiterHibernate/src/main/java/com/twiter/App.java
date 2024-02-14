@@ -31,7 +31,6 @@ public class App {
 		// loggeo (buscar el usuario)
 		Usuario gonzalo = UsuarioAccesoDatos.buscarPorNickName("gonzalo");
 		Usuario pepe = UsuarioAccesoDatos.buscarPorNickName("pepe");
-		Usuario juan = UsuarioAccesoDatos.buscarPorNickName("juan");
 		
 		// gestion de posts
 		Post primerPost = new Post(gonzalo, "Primer post de mi aplicacion de twiter");
@@ -43,9 +42,13 @@ public class App {
 		
 		// Salidas de consola ------------------------------------------------
 		// Ver usuarios
+		System.out.println("Ver usuario gonzalo");
 		System.out.println(gonzalo);
+		System.out.println();
 		// Ver todos los posts
+		System.out.println("Ver todos los posts");
 		System.out.println(posts);
+		System.out.println();
 		// Ver las personas a las que sigue gonzalo
 		System.out.println();
 		
