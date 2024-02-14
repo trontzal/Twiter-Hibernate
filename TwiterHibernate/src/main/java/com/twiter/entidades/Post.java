@@ -78,7 +78,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario + ", texto=" + texto + "]";
+		return "Post [id=" + id + ", fecha=" + fecha + ", usuario=" + usuario.getNickName() + ", texto=" + texto + "]";
 	}
 
 	public Long getId() {

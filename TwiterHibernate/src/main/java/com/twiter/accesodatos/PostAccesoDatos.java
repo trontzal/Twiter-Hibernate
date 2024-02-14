@@ -15,7 +15,8 @@ public class PostAccesoDatos {
 	}
 
 	public static List<Post> obtenerTodos() {
-		return enTransaccion(em -> em.createQuery("select post from Post as post order by post.fecha desc", Post.class)
+		System.err.println("obtenerTodosLosPosts");
+		return enTransaccion(em -> em.createQuery("select post from Post as post join fetch post.usuario join fetch usuario.rol order by post.fecha desc", Post.class)
 				.getResultList());
 	}
 }
