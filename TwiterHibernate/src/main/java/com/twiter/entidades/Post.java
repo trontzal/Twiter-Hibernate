@@ -28,7 +28,7 @@ public class Post {
 	private LocalDateTime fecha;
 
 	@ManyToOne
-	@JoinColumn(name = "usuairo_id", nullable = false, foreignKey = @ForeignKey(name = "FK_post_usuario"))
+	@JoinColumn(name = "usuario_id", nullable = false, foreignKey = @ForeignKey(name = "FK_post_usuario"))
 	private Usuario usuario;
 
 	@Column(name = "texto", nullable = false, length = 240)

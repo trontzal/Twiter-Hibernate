@@ -16,7 +16,7 @@ public class UsuarioAccesoDatos {
 
 	public static Usuario buscarPorNickName(String nickName){
 		return enTransaccion(em ->{
-			System.err.println("BuscarPorNickName");
+			System.err.println("\n BuscarPorNickName");
 			var usuario = em.
 					createQuery("select usuario from Usuario as usuario join fetch usuario.rol where usuario.nickName = :nickName", Usuario.class).
 					setParameter("nickName", nickName).getResultList();

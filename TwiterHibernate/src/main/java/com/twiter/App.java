@@ -36,21 +36,21 @@ public class App {
 		Post primerPost = new Post(gonzalo, "Primer post de mi aplicacion de twiter");
 		PostAccesoDatos.insert(primerPost);
 		var posts = PostAccesoDatos.obtenerTodos();
+		var postsGonzalo = PostAccesoDatos.obtenerPorIdUsuario(gonzalo.getId());
 		
 		// seguimientos
 		UsuarioAccesoDatos.agregarSeguidor(pepe.getId(), gonzalo.getId());
 		
 		// Salidas de consola ------------------------------------------------
 		// Ver usuarios
-		System.out.println("Ver usuario gonzalo");
+		System.out.println("\nVer usuario gonzalo");
 		System.out.println(gonzalo);
-		System.out.println();
 		// Ver todos los posts
-		System.out.println("Ver todos los posts");
+		System.out.println("\nVer todos los posts");
 		System.out.println(posts);
-		System.out.println();
+		System.out.println("\nVer Posts gonzalo");
+		System.out.println(postsGonzalo);
 		// Ver las personas a las que sigue gonzalo
-		System.out.println();
 		
 		
 	}

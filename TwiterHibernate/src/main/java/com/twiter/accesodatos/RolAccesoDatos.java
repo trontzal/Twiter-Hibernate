@@ -11,7 +11,7 @@ public class RolAccesoDatos {
 	}
 	
 	public static Rol obtenerPorId(long id) {
-		System.err.println("ObtenerPorIdRol");
+		System.err.println("\n ObtenerPorIdRol");
 		return AccesoDatos.enTransaccion(em -> em.find(Rol.class, id));
 	}
 	
