@@ -44,7 +44,16 @@ public class UsuarioAccesoDatos {
 	}
 
 	public static void dejarDeSeguir(long id, long dejarDeSeguirA) {
-		// por implementado
+		enTransaccion(em -> {
+			Query query = em
+					.createNativeQuery("DELETE FROM seguidores AS s WHERE (s.seguidor_de_id = :dejarDeSeguirA) and (s.usuario_id = :id);");
+
+			query.setParameter("id", id);
+			query.setParameter("dejarDeSeguirA", dejarDeSeguirA);
+			query.executeUpdate();
+
+			return null;
+		});
 	}
 
 	public static List<String> verSeguidores(long id) {

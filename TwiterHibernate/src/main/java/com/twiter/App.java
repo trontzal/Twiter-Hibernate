@@ -18,33 +18,37 @@ public class App {
 		// roles para que se puedan crear usuarios
 		RolAccesoDatos.insertar(new Rol(null, "ADMIN"));
 		RolAccesoDatos.insertar(new Rol(null, "USER"));
-
+		
 		// obtener el rol para poder usarlo al crear el usuario
 		Rol rolAdmin = RolAccesoDatos.obtenerPorId(1);
 		Rol rolUser = RolAccesoDatos.obtenerPorId(2);
-
-		// registro (insert usuario)
+		
+		//registro (insert usuario)
 		UsuarioAccesoDatos.insertar(new Usuario("gonzalo", "contra", rolAdmin));
 		UsuarioAccesoDatos.insertar(new Usuario("pepe", "pepe", rolUser));
 		UsuarioAccesoDatos.insertar(new Usuario("juan", "juan", rolUser));
-
+		
 		// loggeo (buscar el usuario)
 		Usuario gonzalo = UsuarioAccesoDatos.buscarPorNickName("gonzalo");
 		Usuario pepe = UsuarioAccesoDatos.buscarPorNickName("pepe");
 		Usuario juan = UsuarioAccesoDatos.buscarPorNickName("juan");
-
+		
 		// gestion de posts
 		Post primerPost = new Post(gonzalo, "Primer post de mi aplicacion de twiter");
+		Post segundoPost = new Post(pepe, "Segundo post de mi aplicacion de twiter por pepe");
 		PostAccesoDatos.insert(primerPost);
+		PostAccesoDatos.insert(segundoPost);
 		var posts = PostAccesoDatos.obtenerTodos();
 		var postsGonzalo = PostAccesoDatos.obtenerPorIdUsuario(gonzalo.getId());
-
+		
 		// seguimientos
 		UsuarioAccesoDatos.agregarSeguidor(pepe.getId(), gonzalo.getId());
 		UsuarioAccesoDatos.agregarSeguidor(juan.getId(), gonzalo.getId());
+		UsuarioAccesoDatos.dejarDeSeguir(pepe.getId(), gonzalo.getId());
 		var seguidoresGonzalo = UsuarioAccesoDatos.verSeguidores(gonzalo.getId());
 		var segidosPepe = UsuarioAccesoDatos.verSeguidos(pepe.getId());
-
+		
+		
 		// Salidas de consola ------------------------------------------------
 		// Ver usuarios
 		System.out.println("\nVer usuario gonzalo");
@@ -59,20 +63,33 @@ public class App {
 		System.out.println(seguidoresGonzalo);
 		System.out.println("\nVer seguidos de pepe");
 		System.out.println(segidosPepe);
-
+		
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void mainAntiguo(String[] args) {
 		// Iniciar la sesión de Hibernate
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TwiterApp");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction t = em.getTransaction();
-
-		t.begin();
-
-		// Cerrar la sesión de Hibernate
-		em.close();
-		emf.close();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("TwiterApp");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction t = em.getTransaction();
+        
+        t.begin();
+        
+        // Cerrar la sesión de Hibernate
+        em.close();
+        emf.close();
 	}
 
 }
