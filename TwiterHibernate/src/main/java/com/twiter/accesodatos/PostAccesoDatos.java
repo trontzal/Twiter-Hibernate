@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.twiter.entidades.Post;
 
+import jakarta.persistence.Query;
+
 public class PostAccesoDatos {
 	public static void insert(Post post) {
 		enTransaccion(em -> {
@@ -26,5 +28,21 @@ public class PostAccesoDatos {
 		return enTransaccion(em -> em.createQuery(
 				"select post from Post as post join fetch post.usuario join fetch usuario.rol where post.usuario.id = :id order by post.fecha desc",
 				Post.class).setParameter("id", id).getResultList());
+	}
+
+	public static List<String> obtenerPostsDeSeguidos(long id){
+		System.err.println("\n Obtener todos los posts de los siguiendos");
+		
+		List<String> postSeguidos = enTransaccion(em ->{
+			Query query = em.createNativeQuery(
+					"SELECT p.fecha, u.nick_name, p.texto FROM posts AS p JOIN usuarios AS u ON p.usuario_id = u.id WHERE u.id IN (SELECT s.seguidor_de_id AS sigue_a FROM usuarios AS u JOIN seguidores AS s ON u.id = s.usuario_id WHERE s.usuario_id = 3) ORDER BY p.fecha;");
+			query.setParameter("id", id);
+			@SuppressWarnings("unchecked")
+			List<String> resultList = query.getResultList();
+
+			return resultList;
+		});
+		
+		return postSeguidos;
 	}
 }

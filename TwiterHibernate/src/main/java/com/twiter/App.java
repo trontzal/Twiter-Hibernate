@@ -40,29 +40,36 @@ public class App {
 		PostAccesoDatos.insert(segundoPost);
 		var posts = PostAccesoDatos.obtenerTodos();
 		var postsGonzalo = PostAccesoDatos.obtenerPorIdUsuario(gonzalo.getId());
+		var postsSeguidos = PostAccesoDatos.obtenerPostsDeSeguidos(3);
+		
 		
 		// seguimientos
 		UsuarioAccesoDatos.agregarSeguidor(pepe.getId(), gonzalo.getId());
 		UsuarioAccesoDatos.agregarSeguidor(juan.getId(), gonzalo.getId());
+		UsuarioAccesoDatos.agregarSeguidor(juan.getId(), pepe.getId());
 		UsuarioAccesoDatos.dejarDeSeguir(pepe.getId(), gonzalo.getId());
 		var seguidoresGonzalo = UsuarioAccesoDatos.verSeguidores(gonzalo.getId());
-		var segidosPepe = UsuarioAccesoDatos.verSeguidos(pepe.getId());
+		var segidosJuan = UsuarioAccesoDatos.verSeguidos(juan.getId());
 		
 		
 		// Salidas de consola ------------------------------------------------
-		// Ver usuarios
 		System.out.println("\nVer usuario gonzalo");
 		System.out.println(gonzalo);
-		// Ver todos los posts
+
 		System.out.println("\nVer todos los posts");
 		System.out.println(posts);
+		
 		System.out.println("\nVer Posts gonzalo");
 		System.out.println(postsGonzalo);
-		// Ver seguidos/seguidores
+
 		System.out.println("\nVer seguidores gonzalo");
 		System.out.println(seguidoresGonzalo);
+		
 		System.out.println("\nVer seguidos de pepe");
-		System.out.println(segidosPepe);
+		System.out.println(segidosJuan);
+		
+		System.out.println("\nVer post de seguidos de pepe");
+		System.out.println(postsSeguidos);
 		
 	}
 	
