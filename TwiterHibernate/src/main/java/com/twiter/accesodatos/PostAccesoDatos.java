@@ -30,15 +30,17 @@ public class PostAccesoDatos {
 				Post.class).setParameter("id", id).getResultList());
 	}
 
-	public static List<String> obtenerPostsDeSeguidos(long id){
+	
+	// mal
+	public static List<Object> obtenerPostsDeSeguidos(long id){
 		System.err.println("\n Obtener todos los posts de los siguiendos");
 		
-		List<String> postSeguidos = enTransaccion(em ->{
+		List<Object> postSeguidos = enTransaccion(em ->{
 			Query query = em.createNativeQuery(
-					"SELECT p.fecha, u.nick_name, p.texto FROM posts AS p JOIN usuarios AS u ON p.usuario_id = u.id WHERE u.id IN (SELECT s.seguidor_de_id AS sigue_a FROM usuarios AS u JOIN seguidores AS s ON u.id = s.usuario_id WHERE s.usuario_id = 3) ORDER BY p.fecha;");
+					"SELECT p.fecha, u.nick_name, p.texto FROM posts AS p JOIN usuarios AS u ON p.usuario_id = u.id WHERE u.id IN (SELECT s.seguidor_de_id AS sigue_a FROM usuarios AS u JOIN seguidores AS s ON u.id = s.usuario_id WHERE s.usuario_id = :id) ORDER BY p.fecha;");
 			query.setParameter("id", id);
 			@SuppressWarnings("unchecked")
-			List<String> resultList = query.getResultList();
+			List<Object> resultList = query.getResultList();
 
 			return resultList;
 		});
