@@ -50,6 +50,7 @@ public class App {
 		UsuarioAccesoDatos.dejarDeSeguir(pepe.getId(), gonzalo.getId());
 		var seguidoresGonzalo = UsuarioAccesoDatos.verSeguidores(gonzalo.getId());
 		var segidosJuan = UsuarioAccesoDatos.verSeguidos(juan.getId());
+		var verTodosLosUsuarios = UsuarioAccesoDatos.obtenerTodos();
 		
 		
 		// Salidas de consola ------------------------------------------------
@@ -71,6 +72,8 @@ public class App {
 		System.out.println("\nVer post de seguidos de pepe");
 		System.out.println(postsSeguidos);
 		
+		System.out.println("\nVer todos los usuarios");
+		System.out.println(verTodosLosUsuarios);
 	}
 	
 	
